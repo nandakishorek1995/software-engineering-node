@@ -3,8 +3,8 @@ import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import mongoose from "mongoose";
 
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = "admin" || process.env.DB_USERNAME;
+const DB_PASSWORD = "admin" || process.env.DB_PASSWORD;
 const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.r5rhk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose.connect(connectionString);
 const app = express();
