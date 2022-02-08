@@ -14,14 +14,14 @@ export default class TuitDao implements TuitDaoI {
     async findAllTuits(): Promise<Tuit[]> {
         return await TuitModel.find();
     }
-    async findTuitsByUser(uid: string): Promise<any> {
-        return await TuitModel.find({postedBy:uid});
+    async findTuitsByUser(username: string): Promise<any> {
+        return await TuitModel.find({postedBy:username});
     }
     async findTuitById(tid: string): Promise<any> {
         return await TuitModel.findById(tid);
     }
-    async createTuit(tuit: Tuit): Promise<any> {
-        return await TuitModel.create(tuit);
+    async createTuit(username:string,tuit: Tuit): Promise<any> {
+        return await TuitModel.create({...tuit,postedBy:username});
     }
     async updateTuit(tid: string, tuit: Tuit): Promise<any> {
         return await TuitModel.updateOne({_id: tid}, {$set: tuit});
