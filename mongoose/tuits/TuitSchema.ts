@@ -1,8 +1,9 @@
-import mongoose from 'mongoose'
-import Tuit from "../models/Tuit";
-import {Schema} from "mongoose";
-import UserModel from "./UserModel";
-import UserSchema from "./UserSchema";
+/**
+ * @file Tuit Schema represents the schema of the tuit collections that is present in the MongoDB.
+ */
+import mongoose,{Schema} from 'mongoose'
+import Tuit from '../../models/tuits/Tuit';
+
 
 const TuitSchema = new mongoose.Schema<Tuit>({
     tuit: {type: String, required: true},

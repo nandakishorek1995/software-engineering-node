@@ -1,3 +1,6 @@
+/**
+ * @file User Schema represents the schema of the user collections that is present in the MongoDB.
+ */
 import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
    username: {type: String, required: true},

@@ -1,3 +1,6 @@
+/**
+ * @file TuitController interface represents web services for Tuits resource. 
+ */
 import {Request,Response} from "express"
 
 export default interface TuitController {

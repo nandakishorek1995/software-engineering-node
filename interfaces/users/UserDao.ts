@@ -1,4 +1,7 @@
-import User from "../models/User";
+/**
+ * @file UserDao Interface represents the methods that can be perfomed on an UserModel.
+ */
+import User from "../../models/users/User";
 
 export default interface UserDao {
    findAllUsers(): Promise<User[]>;
