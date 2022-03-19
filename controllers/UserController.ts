@@ -9,16 +9,14 @@ import UserControllerI from "../interfaces/users/UserController";
  * @class UserController Implements RESTful Web service API for users resource.
  * Defines the following HTTP endpoints:
  * <ul>
- *     <li>GET /users to retrieve all the users created.
+ *     <li>GET /api/users to retrieve all the users created.
  *     </li>
- *     <li>GET //users/:userid to retrieve a single user using uid.
+ *     <li>GET /api/users/:userid to retrieve a single user using uid.
  *     </li>
- *     <li>GET /users/:uid/tuits to retrieve all tuits tuited by user.
- *     </li>
- *     <li>POST /users to create a user</li>
- *     <li>DELETE /users/:userid to record that a user
+ *     <li>POST /api/users to create a user</li>
+ *     <li>DELETE /api/users/:userid to record that a user
  *      is deleted</li>
- *     <li>PUT /users/:userid to record that a user is updated</li>
+ *     <li>PUT /api/users/:userid to record that a user is updated</li>
  * </ul>
  * @property {UserDao} userDao Singleton DAO implementing tuits CRUD operations
  * @property {UserController} UserController Singleton controller implementing
@@ -39,7 +37,7 @@ export default class UserController implements UserControllerI {
         return UserController.userController;
    }
    /**
-     * Retrieves all users from the database.
+     * Retrieves all users from the users collection.
      * @param {Request} req Represents request from client to retrieve all the users.
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON arrays containing the user objects.
@@ -48,7 +46,7 @@ export default class UserController implements UserControllerI {
         UserController.userDao.findAllUsers()
            .then(users => res.json(users));
      /**
-     * Retrieves a user from the database.
+     * Retrieves a user from the users collection.
      * @param {Request} req Represents request from client, including the path
      * parameter userid representing the user.
      * @param {Response} res Represents response to client, including the
@@ -59,6 +57,7 @@ export default class UserController implements UserControllerI {
            .then(user => res.json(user));
 
      /**
+     * creates the user in the user collection as per the request body.
      * @param {Request} req Represents request from client, including the
      * path parameters body representing the creating a user.
      * @param {Response} res Represents response to client, including the
@@ -69,6 +68,7 @@ export default class UserController implements UserControllerI {
         UserController.userDao.createUser(req.body)
            .then(user => res.json(user));
      /**
+      * Deletes the user from the user collection with id as userid
      * @param {Request} req Represents request from client, including the
      * path parameters userid representing the user is deleted.
      * @param {Response} res Represents response to client, including status
@@ -78,6 +78,7 @@ export default class UserController implements UserControllerI {
         UserController.userDao.deleteUser(req.params.userid)
            .then(status => res.json(status));
      /**
+      * Updates the user from the user collection with id as userid using the request body.
      * @param {Request} req Represents request from client, including the
      * path parameters userid and body representing the user and the details of the user..
      * @param {Response} res Represents response to client, including the

@@ -9,7 +9,7 @@ import UserDaoI from "../interfaces/users/UserDao";
 /**
  * @class UserDao Implements Data Access Object managing data storage
  * of Users
- * @property {UserDao} userDao  single instance of UserDao
+ * @property {UserDao} userDao  single instance of UserDao which is obtained using a singleton design pattern.
  */
 export default class UserDao implements UserDaoI {
 
@@ -22,7 +22,7 @@ export default class UserDao implements UserDaoI {
     }
     private constructor(){}
     /**
-     * Uses UserModel to retrieve all user documents from users collection
+     * Retrieves all user documents from users collection.
      * @returns Promise To be notified when the users are retrieved from
      * database
      */
@@ -30,7 +30,7 @@ export default class UserDao implements UserDaoI {
        return await UserModel.find();
     }
     /**
-     * Uses UserModel to retrieve single user document from users collection
+     * Retrieve single user document with id:uid from users collection
      * @param {string} uid User's primary key
      * @returns Promise To be notified when user is retrieved from the database
      */
@@ -38,7 +38,7 @@ export default class UserDao implements UserDaoI {
        return await UserModel.findById(uid);
     }
     /**
-     * Inserts user instance into the database
+     * Creates user instance into the users collection.
      * @param {User} user Instance to be inserted into the database
      * @returns Promise To be notified when user is inserted into the database
      */
@@ -46,7 +46,7 @@ export default class UserDao implements UserDaoI {
        return await UserModel.create(user);
     }
     /**
-     * Removes user from the database.
+     * Removes user from the users collection.
      * @param {string} uid Primary key of user to be removed
      * @returns Promise To be notified when user is removed from the database
      */
@@ -54,7 +54,7 @@ export default class UserDao implements UserDaoI {
         return await UserModel.deleteOne({_id: uid});
     }
     /**
-     * Updates user with new values in database
+     * Updates user with id: uid with new values in users collection.
      * @param {string} uid Primary key of user to be modified
      * @param {User} user User object containing properties and their new values
      * @returns Promise To be notified when user is updated in the database

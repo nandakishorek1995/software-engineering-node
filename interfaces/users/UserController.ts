@@ -1,3 +1,6 @@
+/**
+ * @file UserController interface represents web services for Users resource. 
+ */
 import {Request, Response} from "express";
 
 export default interface UserController {

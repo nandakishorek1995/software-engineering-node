@@ -57,7 +57,7 @@ export default class LikeDao implements LikeDaoI {
         LikeModel.create({tuit: tid, likedBy: uid});
 
     /**
-     * Deletes Like record from the liks collection when the user unlikes a tuit.
+     * Deletes Like record from the likes collection when the user unlikes a tuit.
      * @param {string} uid Primary key of user to retrieve the message.
      * @param {string} tid Primary key of tuit.
      * @returns Promise To be notified when like is removed from the database

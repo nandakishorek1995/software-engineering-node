@@ -45,7 +45,7 @@ export default class BookmarkDao implements BookmarkDaoI {
         BookmarkModel.create({tuit: tid, bookMarkedBy: uid});
 
     /**
-     * delets bookmark record which contains the tuit id and user id.
+     * deletes bookmark record which contains the tuit id and user id.
      * @param {string} uid Primary key of user to retrieve the bookmark.
      * @param {string} tid Primary key of tuit.
      * @returns Promise To be notified when bookmark is removed from the database

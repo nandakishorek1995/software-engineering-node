@@ -59,7 +59,7 @@ export default class MessageDao implements MessageDaoI {
 
 
     /**
-     * Delets Message from the message collection.
+     * Deletes Message from the message collection.
      * @param {string} uid Primary key of user to retrieve the message.
      * @param {string} mid Primary key of message.
      * @returns Promise To be notified when message is removed from the database
