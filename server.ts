@@ -27,6 +27,8 @@ const DB_PASSWORD = "admin" || process.env.DB_PASSWORD;
 const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.r5rhk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose.connect(connectionString);
 const app = express();
+const cors = require('cors')
+app.use(cors());
 app.use(express.json());
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World!'));
