@@ -32,7 +32,7 @@ const app = express();
 const cors = require('cors')
 app.use(cors({
     credentials: true,
-    origin: 'https://fse-react-nanda.netlify.app'
+    origin: ['https://fse-react-nanda.netlify.app','https://a4--fse-react-nanda.netlify.app']
   }));
   const SECRET = 'process.env.SECRET';
 
