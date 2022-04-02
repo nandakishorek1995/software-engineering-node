@@ -24,12 +24,25 @@ import mongoose from "mongoose";
 
 const DB_USERNAME = "admin" || process.env.DB_USERNAME;
 const DB_PASSWORD = "admin" || process.env.DB_PASSWORD;
+const session = require("express-session");
 const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.r5rhk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose.connect(connectionString);
 const app = express();
 const cors = require('cors')
 app.use(cors());
 app.use(express.json());
+let sess = {
+    secret: process.env.SECRET,
+    cookie: {
+        secure: false
+    }
+ }
+ 
+ if (process.env.ENV === 'PRODUCTION') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+ }
+ 
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World!'));
 
