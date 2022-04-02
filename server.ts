@@ -20,6 +20,7 @@ import LikeController from "./controllers/LikeController";
 import BookmarkController from "./controllers/BookmarkController";
 import FollowController from "./controllers/FollowController";
 import MessageController from "./controllers/MessageController";
+import AuthenticationController from './controllers/AuthenticationController';
 import mongoose from "mongoose";
 
 const DB_USERNAME = "admin" || process.env.DB_USERNAME;
@@ -29,10 +30,16 @@ const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.r
 mongoose.connect(connectionString);
 const app = express();
 const cors = require('cors')
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+    credentials: true,
+    origin: 'https://fse-react-nanda.netlify.app/'
+  }));
+  const SECRET = 'process.env.SECRET';
+
 let sess = {
-    secret: process.env.SECRET,
+    secret: SECRET,
+    saveUninitialized: true,
+    resave: true,
     cookie: {
         secure: false
     }
@@ -42,7 +49,9 @@ let sess = {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
  }
- 
+ app.use(session(sess))
+ app.use(express.json());
+
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World!'));
 
@@ -55,6 +64,7 @@ const likeController = LikeController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const messageController = MessageController.getInstance(app);
+AuthenticationController(app);
 /**
  * Start a server listening at port 3000 locally
  * but use environment variable PORT on Heroku if available.
