@@ -5,6 +5,7 @@ import {Request, Response, Express} from "express";
 import TuitDao from "../daos/TuitDao";
 import TuitControllerI from "../interfaces/tuits/TuitController";
 import Tuit from "../models/tuits/Tuit";
+"Access-Control-Allow-Origin: *"
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
  * Defines the following HTTP endpoints:
@@ -57,9 +58,14 @@ export default class TuitController implements TuitControllerI {
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON arrays containing the tuit objects.
      */
-    findTuitsByUser = (req: Request, res: Response) =>
-        TuitController.tuitDao.findTuitsByUser(req.params.uid)
+     findTuitsByUser = (req: Request, res: Response) => {
+        // @ts-ignore
+        let userId = req.params.uid === "me" && req.session['profile'] ?
+            // @ts-ignore
+            req.session['profile']._id : req.params.uid;
+        TuitController.tuitDao.findTuitsByUser(userId)
             .then((tuits: Tuit[]) => res.json(tuits));
+    }
     /**
      * Retrieves a single tuit document from tuits collection which has id as tid.
      * @param {Request} req Represents request from client, including the path
@@ -78,9 +84,17 @@ export default class TuitController implements TuitControllerI {
      * body formatted as JSON containing the new tuit that was inserted in the
      * database.
      */
-    createTuit = (req: Request, res: Response) =>
-        TuitController.tuitDao.createTuit(req.params.uid,req.body)
-            .then(tuit => res.json(tuit));
+     createTuit = (req: Request, res: Response) => {
+        // @ts-ignore
+        let userId = req.params.uid === "my" && req.session['profile'] ?
+            // @ts-ignore
+            req.session['profile']._id : req.params.uid;
+
+        console.log(userId);
+        
+        TuitController.tuitDao.createTuit(userId, req.body)
+            .then((tuit: Tuit) => res.json(tuit));
+    }
     /**
      * Removes tuit from the tuits collection.
      * @param {Request} req Represents request from client, including the

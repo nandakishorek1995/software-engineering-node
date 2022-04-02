@@ -3,6 +3,7 @@
  */
 import User from "../users/User";
 import mongoose from "mongoose";
+import Stats from "../Stats";
 
 /**
  * @typedef Tuit Represents information about the tuit i.e when the tuit is posted and by whom the tuit has been posted.
@@ -11,8 +12,12 @@ import mongoose from "mongoose";
  * @property postedOn{Date} The date when the tuit has been posted.
  */
  export default interface Tuit {
-   _id: mongoose.Schema.Types.ObjectId,
-   tuit: string,
-   postedBy: User,
-   postedOn: Date,
+  tuit: string,
+  postedBy: User,
+  postedOn?: Date,
+  image?: String,
+  youtube?: String,
+  avatarLogo?: String,
+  imageOverlay?: String,
+  stats: Stats
 };

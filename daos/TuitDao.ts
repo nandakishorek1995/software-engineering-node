@@ -35,7 +35,9 @@ export default class TuitDao implements TuitDaoI {
      * database
      */
     async findTuitsByUser(uid: string): Promise<any> {
-        return await TuitModel.find({postedBy:uid});
+        return await TuitModel.find({postedBy:uid}).sort({'postedOn': -1})
+        .populate("postedBy")
+        .exec();
     }
     /**
      * Retrieves a single tuit document from tuits collection which has id as tid.
