@@ -32,7 +32,7 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: ['https://fse-react-nanda.netlify.app','https://a4--fse-react-nanda.netlify.app']
+    origin: ['https://a4--fse-react-nanda.netlify.app']
   }));
 const SECRET = 'process.env.SECRET';
 
@@ -41,7 +41,8 @@ let sess = {
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production",
     }
  }
  
