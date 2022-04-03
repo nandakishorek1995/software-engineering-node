@@ -34,10 +34,10 @@ app.use(cors({
     credentials: true,
     origin: ['https://a4--fse-react-nanda.netlify.app']
   }));
-const SECRET = 'process.env.SECRET';
+
 
 let sess = {
-    secret: SECRET,
+    secret: process.env.SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
