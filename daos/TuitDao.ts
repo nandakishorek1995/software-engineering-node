@@ -65,6 +65,17 @@ export default class TuitDao implements TuitDaoI {
     async updateTuit(tid: string, tuit: Tuit): Promise<any> {
         return await TuitModel.updateOne({_id: tid}, {$set: tuit});
     }
+
+    /**
+     * Updates likes count with new values in database
+     * @param {string} tid Primary key of tuit stas to be modified
+     * @param {any} newStats new stats object for the tuit to be updated
+     * @returns Promise To be notified when tuit stats is updated in the database
+     */
+     updateLikes = async (tid: string, newStats: any): Promise<any> =>
+         TuitModel.updateOne(
+             {_id: tid},
+             {$set: {stats: newStats}});
     /**
      * Removes tuit from the tuits collection.
      * @param {string} tid Primary key of tuit to be removed
