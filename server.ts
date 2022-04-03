@@ -27,14 +27,14 @@ const DB_USERNAME = "admin" || process.env.DB_USERNAME;
 const DB_PASSWORD = "admin" || process.env.DB_PASSWORD;
 const session = require("express-session");
 const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.r5rhk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+var cors = require('cors')
 mongoose.connect(connectionString);
 const app = express();
-const cors = require('cors')
 app.use(cors({
     credentials: true,
     origin: ['https://fse-react-nanda.netlify.app','https://a4--fse-react-nanda.netlify.app']
   }));
-  const SECRET = 'process.env.SECRET';
+const SECRET = 'process.env.SECRET';
 
 let sess = {
     secret: SECRET,
