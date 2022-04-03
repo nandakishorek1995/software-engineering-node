@@ -49,6 +49,7 @@ let sess = {
  if (process.env.NODE_ENV === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
+    console.log(process.env.NODE_ENV);
  }
  app.use(session(sess))
  app.use(express.json());
