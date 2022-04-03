@@ -35,7 +35,7 @@ const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.r
  
  app.use(cors({
      credentials: true,
-     origin: ["http://localhost:3000","https://a4--fse-react-nanda.netlify.app","*"]
+     origin: ["http://localhost:3000","https://a4--fse-react-nanda.netlify.app"]
  }));
  const SECRET = 'process.env.SECRET';
  let sess = {
