@@ -5,7 +5,7 @@ import {Request, Response, Express} from "express";
 import TuitDao from "../daos/TuitDao";
 import TuitControllerI from "../interfaces/tuits/TuitController";
 import Tuit from "../models/tuits/Tuit";
-"Access-Control-Allow-Origin: *"
+
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
  * Defines the following HTTP endpoints:

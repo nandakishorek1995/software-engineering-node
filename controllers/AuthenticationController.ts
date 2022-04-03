@@ -2,7 +2,6 @@ import {Request, Response, Express} from "express";
 import UserDao from "../daos/UserDao";
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-"Access-Control-Allow-Origin: *"
 
 const AuthenticationController = (app: Express) => {
 
