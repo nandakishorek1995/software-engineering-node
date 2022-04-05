@@ -1,7 +1,11 @@
-import LikeDaoI from "../interfaces/likes/LikeDao";
+/**
+ * @file Implements DAO managing data storage of likes. Uses mongoose LikeModel
+ * to integrate with MongoDB
+ */
+ import LikeDaoI from "../interfaces/likes/LikeDao";
  import LikeModel from "../mongoose/likes/LikeModel";
  import Like from "../models/likes/Like";
-
+ 
  /**
   * @class LikeDao Implements Data Access Object managing data storage
   * of Likes
@@ -16,10 +20,10 @@ import LikeDaoI from "../interfaces/likes/LikeDao";
          }
          return LikeDao.likeDao;
      }
-
+ 
      private constructor() {
      }
-
+ 
      /**
       * Uses LikeModel to retrieve all users in like documents from likes collection liked a tuit
       * @param {string} tid Tuit's primary key
@@ -61,7 +65,7 @@ import LikeDaoI from "../interfaces/likes/LikeDao";
       */
      userUnlikesTuit = async (uid: string, tid: string): Promise<any> =>
          LikeModel.deleteOne({tuit: tid, likedBy: uid});
-
+ 
      /**
       * Check if the user has already liked the tuit
       * @param {string} uid User's primary key
@@ -70,7 +74,7 @@ import LikeDaoI from "../interfaces/likes/LikeDao";
       */
      findUserLikesTuit = async (uid: string, tid: string): Promise<any> =>
          LikeModel.findOne({tuit: tid, likedBy: uid});
-
+ 
      /**
       * Count how many likes this tuit has
       * @param {string} tid Tuit's primary key
@@ -78,4 +82,4 @@ import LikeDaoI from "../interfaces/likes/LikeDao";
       */
      countHowManyLikedTuit = async (tid: string): Promise<any> =>
          LikeModel.count({tuit: tid});
- } 
+ }

@@ -5,7 +5,7 @@
  import DislikeDao from "../daos/DislikeDao";
  import DislikeControllerI from "../interfaces/dislikes/DislikeController";
  import TuitDao from "../daos/TuitDao";
-
+ 
  /**
   * @class DislikeController Implements RESTful Web service API for dislikes resource.
   * Defines the following HTTP endpoints:
@@ -37,34 +37,14 @@
      public static getInstance = (app: Express): DislikeController => {
          if (DislikeController.dislikeController === null) {
              DislikeController.dislikeController = new DislikeController();
-             app.get("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.findUserDislikedTuit);
              app.put("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userTogglesTuitDislikes);
          }
          return DislikeController.dislikeController;
      }
-
+ 
      private constructor() {
      }
-
-     /**
-      * Check if the user has already disliked the tuit
-      * @param {Request} req Represents request from client, including the path
-      * parameter uid representing the user, and the tid representing the tuit
-      * @param {Response} res Represents response to client, including the
-      * body formatted as JSON object containing the dislike objects or null
-      */
-     findUserDislikedTuit = async (req: Request, res: Response) => {
-         const uid = req.params.uid;
-         const tid = req.params.tid;
-         // @ts-ignore
-         const profile = req.session['profile'];
-         const userId = uid === 'me' && profile ?
-             profile._id : uid;
-         DislikeController.dislikeDao.findUserDislikesTuit(userId, tid)
-             .then(dislike => res.json(dislike));
-     }
-
-
+ 
      /**
       * @param {Request} req Represents request from client, including the
       * path parameters uid and tid representing the user that is liking the tuit
@@ -100,4 +80,4 @@
              res.sendStatus(404);
          }
      }
- }; 
+ };
